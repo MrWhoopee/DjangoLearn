@@ -1,5 +1,5 @@
 """
-URL configuration for sitewomen project.
+URL configuration for a sitewomen project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.2/topics/http/urls/
@@ -21,6 +21,6 @@ from women import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('women/', include('women.urls')),
+    path('', include('women.urls')),
 
 ]

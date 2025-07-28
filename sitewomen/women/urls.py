@@ -3,6 +3,7 @@ from multiprocessing.resource_tracker import register
 from django.urls import path, re_path, register_converter
 from . import converters
 from . import views
+from .views import page_not_found
 
 register_converter(converters.FourDigitYearConverter, 'year4')
 
@@ -12,3 +13,4 @@ urlpatterns = [
     path('cats/<slug:cat_slug>',views.categories_by_slug),
     path('archive/<year4:year>/',views.archive)
 ]
+

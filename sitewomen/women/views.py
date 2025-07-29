@@ -7,13 +7,31 @@ from django.urls import reverse
 
 # Create your views here.
 
+menu = ['Site About','Add article','Feedback','Sing up']
+
+class MyClass:
+    def __init__(self,a,b):
+        self.a = a
+        self.b = b
+
+
 def index(request): # HttpRequest через цей клас буде доступна вся інформація про поточний запит
     # t = render_to_string('women/index.html')
     # return HttpResponse(t)
-    return render(request,'women/index.html')
+    data = {
+        'title': 'Main Page',
+        'menu': menu,
+        'float': 28.56,
+        'lst': [1,2,'abc',True],
+        'set': (1,2,3,4),
+        'dict': {'key1': 1, 'key2': 2},
+        'obj': MyClass(10,20),
+
+    }
+    return render(request,'women/index.html',context=data)
 
 def about(request):
-    return render(request,'women/about.html')
+    return render(request,'women/about.html', {'title': 'About Page'})
 
 def categories(request, cat_id):
     return HttpResponse(f'<h1>Categories</h1><p>id: {cat_id}</p>')

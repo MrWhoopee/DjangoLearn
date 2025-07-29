@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import redirect, render
 from django.template.context_processors import request
+from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 from django.urls import reverse
 
@@ -19,13 +20,14 @@ def index(request): # HttpRequest через цей клас буде досту
     # t = render_to_string('women/index.html')
     # return HttpResponse(t)
     data = {
-        'title': 'Main Page',
+        'title': 'main Page',
         'menu': menu,
         'float': 28.56,
         'lst': [1,2,'abc',True],
         'set': (1,2,3,4),
         'dict': {'key1': 1, 'key2': 2},
         'obj': MyClass(10,20),
+        'url': slugify('The main Page'),
 
     }
     return render(request,'women/index.html',context=data)

@@ -31,7 +31,7 @@ def index(request):
 
 
 def about(request):
-    return render(request,'women/about.html', {'title': 'About Page'})
+    return render(request,'women/about.html', {'title': 'About Page','menu':menu})
 
 def show_post(request,post_id):
     return HttpResponse(f"Show article id: {post_id}")

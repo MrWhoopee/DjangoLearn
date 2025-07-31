@@ -1,10 +1,6 @@
 from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import redirect, render
-from django.template.context_processors import request
-from django.template.defaultfilters import slugify
-from django.template.loader import render_to_string
-from django.urls import reverse
-
+from django.shortcuts import redirect, render, get_object_or_404
+from women.models import Women
 
 # Create your views here.
 
@@ -28,11 +24,11 @@ cats_db = [
 ]
 
 def index(request):
-
+    posts = Women.published.all()
     data = {
         'title': 'Головна',
         'menu': menu,
-        'posts': data_db,
+        'posts': posts,
         'cat_selected': 0,
     }
     return render(request,'women/index.html',context=data)
@@ -41,8 +37,14 @@ def index(request):
 def about(request):
     return render(request,'women/about.html', {'title': 'Про сторінку','menu':menu})
 
-def show_post(request,post_id):
-    return HttpResponse(f"Show article id: {post_id}")
+def show_post(request,post_slug):
+    post = get_object_or_404(Women,slug=post_slug)
+    data = {'title': post.title,
+            'menu': menu,
+            'post': post,
+            'cat_selected': 1}
+
+    return render(request,'women/post.html',data)
 
 
 def addpage(request):

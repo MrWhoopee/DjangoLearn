@@ -149,4 +149,14 @@ AUTHENTICATION_BACKENDS = [
         'users.authentication.EmailAuthBackend',
 ]
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587                       # порт (587 для TLS, 465 для SSL)
+# EMAIL_USE_TLS = True                   # використовуємо TLS
+# EMAIL_USE_SSL = False                  # SSL не використовується разом із TLS
+# EMAIL_HOST_USER = 'artem.holovko.97@gmail.com'
+# EMAIL_HOST_PASSWORD = ''
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

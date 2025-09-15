@@ -14,14 +14,25 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from linecache import cache
+
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
+from django.views.decorators.cache import cache_page
 
 from sitewomen import settings
 from women import views
+from women.models import Category
+from women.sitemaps import WomenPostsSitemap, CategorySitemap
 from women.views import page_not_found
+
+sitemaps = {
+    'posts': WomenPostsSitemap,
+    'cats': CategorySitemap,
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +40,7 @@ urlpatterns = [
     path('users/', include('users.urls', namespace= 'users')),
     path("social-auth/", include('social_django.urls', namespace="social")),
     path('captcha/', include('captcha.urls')),
+    path('sitemap.xml', cache_page(86400)(sitemap), {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ] + debug_toolbar_urls()
 
 if settings.DEBUG:

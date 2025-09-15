@@ -24,6 +24,7 @@ class WomenHome(DataMixin,ListView):
 
     def get_queryset(self):
         w_lst = cache.get('women_posts')
+
         if not w_lst:
             w_lst = Women.published.all().select_related('cat')
             cache.set('women_posts', w_lst, 60)
